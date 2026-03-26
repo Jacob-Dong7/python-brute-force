@@ -1,25 +1,29 @@
-from graph import Graph
-import os
-class DFS:
+from queue import Queue
+class BFS:
     def __init__(self):
         return
     
     def traverse(self, graph):
-        path = []
         visited = set()
-
-        def dfs(v, graph):
-            path.append(v)
-            visited.add(v)
-            for neighbour in graph.neighbours(v):
-                if  neighbour not in visited:
-                    dfs(neighbour, graph)
+        path = []
+        queue = Queue()
 
         v = self.starting_vertex(graph)
-        dfs(v, graph)
+        queue.put(v)
+        visited.add(v)
 
+        while not queue.empty():
+            current = queue.get()
+            path.append(current)
+
+            for neighbour in graph.neighbours(current):
+                if neighbour not in visited:
+                    queue.put(neighbour)
+                    visited.add(neighbour)
+        
         return path
-    
+
+
     def starting_vertex(self, graph):
         graph.__str__()
         user_input = input("Enter Vertex: ")
@@ -27,12 +31,9 @@ class DFS:
 
     def print_path(self, path):
         print("==================================================")
-        print("Depth First Search Traversal Map")
+        print("Bredth First Search Traversal Map")
         print("==================================================")
         for vertex in path:
             print(f"{vertex}",end=" ")
         print()
         print("==================================================")
-
-
-    

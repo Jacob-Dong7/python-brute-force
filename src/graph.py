@@ -1,4 +1,5 @@
 from sortedcontainers import SortedList
+import os
 class Graph:
     def __init__(self, vert_num = None, file = None):
         self.vert_num = 0
@@ -21,7 +22,9 @@ class Graph:
     def validate(self, v):
         if v < 0 or v >= self.vert_num:
             print(f"{v} is < 0 or larger than {self.vert_num}")
-            raise IndexError
+            return False
+        else:
+            return True
         
     def generated_adj_list(self, vert_num):
         for v in range(vert_num):
@@ -56,5 +59,8 @@ class Graph:
             for neighbour in self.adj_list[v]:
                 print(f"{neighbour}",end=" ")
             print()
+    
+
+
 
     
